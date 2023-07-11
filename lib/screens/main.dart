@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:airport_test/entities/flight/api.dart';
 import 'package:airport_test/entities/flight/model.dart';
-import 'package:airport_test/entities/flight/ui/flight.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../widgets/flightCardComposer.dart';
 
 class MainScreen extends StatefulWidget {
@@ -23,7 +21,6 @@ class MainScreenState extends State<MainScreen> {
     setState(() {
       flights = data;
     });
-    print("data init");
   }
 
   void searchChanged(String value) {
@@ -38,8 +35,6 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("here data");
-    var rng = Random();
 
     return Scaffold(
       appBar: AppBar(

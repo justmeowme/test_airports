@@ -1,15 +1,12 @@
 import 'dart:math';
 
-import 'package:airport_test/entities/destination/model.dart';
 import 'package:airport_test/entities/flight/model.dart';
 import 'package:airport_test/entities/flight/ui/flight.dart';
-import 'package:airport_test/entities/thread/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 import '../entities/stop/model.dart';
-import 'flightCardComposer.dart';
 
 
 class FlightList extends StatelessWidget {
@@ -70,58 +67,56 @@ class FlightList extends StatelessWidget {
                     logo: flight.thread?.carrier?.logoSvg ?? "",
                   ),
                   Container(
-                    child: index != flights.length - 1 ? Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 32,),
-                          SvgPicture.asset(
-                            'assets/icons/divider.svg', // Replace this with the path to your SVG image
-                            semanticsLabel: 'SVG Image',
-                            width: MediaQuery.sizeOf(context).width,
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 12, bottom: 12),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/stopwatch.svg', // Replace this with the path to your SVG image
-                                    semanticsLabel: 'SVG Image',
+                    child: index != flights.length - 1 ? Column(
+                      children: [
+                        const SizedBox(height: 32,),
+                        SvgPicture.asset(
+                          'assets/icons/divider.svg', // Replace this with the path to your SVG image
+                          semanticsLabel: 'SVG Image',
+                          width: MediaQuery.sizeOf(context).width,
+                        ),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 12, bottom: 12),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/stopwatch.svg', // Replace this with the path to your SVG image
+                                  semanticsLabel: 'SVG Image',
+                                ),
+                                const SizedBox(width: 9,),
+                                Text(
+                                  'Stop at ${stops[index].settlementStation}',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                  SizedBox(width: 9,),
-                                  Text(
-                                    'Stop at ${stops[index].settlementStation}',
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                ),
+                                const SizedBox(width: 9),
+                                Text(
+                                  '${stops[index].duration!.toInt() ~/ 3600} hr ${(stops[index].duration!.toInt() % 3600) ~/ 60} min layover',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                  const SizedBox(width: 9),
-                                  Text(
-                                    '${stops[index].duration!.toInt() ~/ 3600} hr ${(stops[index].duration!.toInt() % 3600) ~/ 60} min layover',
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                          SvgPicture.asset(
-                            'assets/icons/divider.svg', // Replace this with the path to your SVG image
-                            semanticsLabel: 'SVG Image',
-                            width: MediaQuery.sizeOf(context).width,
-                          ),
-                        ],
-                      ),
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/divider.svg', // Replace this with the path to your SVG image
+                          semanticsLabel: 'SVG Image',
+                          width: MediaQuery.sizeOf(context).width,
+                        ),
+                      ],
                     ) : null,
                   )
 

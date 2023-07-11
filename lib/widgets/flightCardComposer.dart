@@ -1,13 +1,10 @@
 import 'dart:math';
 
-import 'package:airport_test/entities/destination/model.dart';
 import 'package:airport_test/entities/flight/model.dart';
 import 'package:airport_test/entities/flight/ui/flight.dart';
 import 'package:airport_test/entities/stop/model.dart';
-import 'package:airport_test/entities/thread/model.dart';
 import 'package:airport_test/widgets/flightList.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 
@@ -51,7 +48,6 @@ class FlightCardComposer extends StatelessWidget {
     if (isComposed==true){
       transfersData = flight.transfersData;
       stopData = flight.stopsData;
-      print(stopData);
     }
 
     //main white bg container
@@ -79,11 +75,11 @@ class FlightCardComposer extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Center(
+              const Center(
                 child: Padding(
                   padding: EdgeInsets.only(top: 15, bottom: 15),
                   child: Text(
-                    "Total Time : 12h 0m",
+                    "Total Time : 1h 15m",
                       style: TextStyle(
                         color: Color(0xFF494949),
                         fontSize: 14,
@@ -94,7 +90,7 @@ class FlightCardComposer extends StatelessWidget {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.all(24),
+                  padding: const EdgeInsets.all(24),
                   child: isComposed == false ? FlightCard(
                     totalTime: getTotalTime(flight.departure.toString(), flight.arrival.toString()),
                     departureTime: formatTime(flight.departure.toString()),
