@@ -43,21 +43,26 @@ class MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("hello"),
+        title: const Text("hello"),
       ),
       body: Center(
-        child: flights.length != 0 ? ListView.builder(
-          itemCount: flights.length,
-          itemBuilder: (context, index) {
+        child: SizedBox(
+          width: MediaQuery.sizeOf(context).width > 600 ? 600 : MediaQuery.sizeOf(context).width,
+          child: Center(
+              child: flights.isNotEmpty ? ListView.builder(
+                itemCount: flights.length,
+                itemBuilder: (context, index) {
 
-            return Padding(
-              child: FlightCardComposer(flight: flights[index]),
-              padding: EdgeInsets.all(20),
-            );
-          },
-        ) : null
+                  return Padding(
+                    padding: const EdgeInsets.all(9),
+                    child: FlightCardComposer(flight: flights[index]),
+                  );
+                },
+              ) : null
 
-      ),
+          ),
+        ),
+      )
     );
   }
 }

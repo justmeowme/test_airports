@@ -1,4 +1,5 @@
 import 'package:airport_test/entities/destination/model.dart';
+import 'package:airport_test/entities/stop/model.dart';
 import 'package:airport_test/entities/thread/model.dart';
 
 class Flight {
@@ -16,6 +17,8 @@ class Flight {
   String? arrivalTerminal;
   String? startDate;
   String? arrivalPlatform;
+  List<Flight>? transfersData;
+  List<Stop>? stopsData;
 
 
   Destination? departureFrom;
@@ -24,6 +27,8 @@ class Flight {
 
 
   Flight({
+    this.transfersData,
+    this.stopsData,
     this.thread,
     this.from,
     this.to,
@@ -45,6 +50,21 @@ class Flight {
 
   factory Flight.fromJson(Map<String, dynamic> json) {
     return Flight(
+      transfersData: json["details"] != null ? (json["details"] as List).where((el) {
+        var index = (json["details"] as List).indexOf(el);
+        return index % 2 != 1;
+      }).map((el) {
+        print(el['thread']);
+        var thread = Flight.fromJson(el) as Flight;
+        return thread;
+      }).toList() : <Flight>[],
+      stopsData: json["details"] != null ? (json["details"] as List).where((el) {
+        var index = (json["details"] as List).indexOf(el);
+        return index % 2 != 0;
+      }).map((el) {
+        var dest = Stop.fromJson(el) as Stop;
+        return dest;
+      }).toList() : <Stop>[],
       thread: json['thread'] != null ? Thread.fromJson(json['thread']) : null,
       from: json['from'] != null ? Destination.fromJson(json['from']) : null,
       to: json['to'] != null ? Destination.fromJson(json['to']) : null,
